@@ -10,6 +10,10 @@ require('./models/user')
 
 app.use(cors());
 
+app.use(express.json())
+
+app.use(require('./routes/auth'))
+
 const dbKey = process.env.USER_KEY;
 
 mongoose.connect(
@@ -23,8 +27,8 @@ mongoose.connection.on("error", (err) => {
 });
 
 // respond with "hello world" when a GET request is made to the homepage
-app.get("/", function (req, res) {
-  res.send("hello world");
-});
+// app.get("/", function (req, res) {
+//   res.send("hello world");
+// });
 
 app.listen(PORT, () => console.log("Server run on port " + PORT));
