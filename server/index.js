@@ -4,15 +4,11 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 const cors = require("cors");
 require("dotenv").config();
-require('./models/user')
-
-
+require("./models/user");
 
 app.use(cors());
-
-app.use(express.json())
-
-app.use(require('./routes/auth'))
+app.use(express.json());
+app.use(require("./routes/auth"));
 
 const dbKey = process.env.USER_KEY;
 
