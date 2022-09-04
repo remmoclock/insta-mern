@@ -6,10 +6,6 @@ const cors = require("cors");
 require("dotenv").config();
 require("./models/user");
 
-app.use(cors());
-app.use(express.json());
-app.use(require("./routes/auth"));
-
 const dbKey = process.env.USER_KEY;
 
 mongoose.connect(
@@ -21,6 +17,10 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("error", (err) => {
   console.log("err connecting", err);
 });
+
+app.use(cors());
+app.use(express.json());
+app.use(require("./routes/auth"));
 
 // respond with "hello world" when a GET request is made to the homepage
 // app.get("/", function (req, res) {
