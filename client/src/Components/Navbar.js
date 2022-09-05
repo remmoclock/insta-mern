@@ -1,21 +1,22 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <nav>
       <div className="nav-wrapper white">
-        <a href="/" className="brand-logo left">
-          Logo
-        </a>
+        <Link to="/" className="brand-logo left">
+          Instagram
+        </Link>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
-            <a href="/">Login</a>
+            <Link to="/signin">Sign in</Link>
           </li>
           <li>
-            <a href="/">Sign up</a>
+            <Link to="/signup">Sign up</Link>
           </li>
           <li>
-            <a href="/">Sign in</a>
+            <Link to="/profile">Profile</Link>
           </li>
         </ul>
       </div>
