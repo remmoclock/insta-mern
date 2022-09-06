@@ -13,7 +13,7 @@ function Home() {
           />
         </div>
         <div className="card-content">
-          <i class="material-icons" style={{ color: "red" }}>
+          <i className="material-icons" style={{ color: "red" }}>
             favorite
           </i>
           <h6>title</h6>
@@ -31,7 +31,7 @@ function Home() {
           />
         </div>
         <div className="card-content">
-          <i class="material-icons" style={{ color: "red" }}>
+          <i className="material-icons" style={{ color: "red" }}>
             favorite
           </i>
           <h6>title</h6>
@@ -49,7 +49,7 @@ function Home() {
           />
         </div>
         <div className="card-content">
-          <i class="material-icons" style={{ color: "red" }}>
+          <i className="material-icons" style={{ color: "red" }}>
             favorite
           </i>
           <h6>title</h6>
