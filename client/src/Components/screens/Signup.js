@@ -9,18 +9,11 @@ function Signup() {
   const [name, setName] = useState("");
 
   const PostData = () => {
-    if (
-      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(//eslint-disable-line
-        email
-      )
-    ) {
-      M.toast({
-        html: "invalid email",
-        classes: "#c62828 red darken-3 rounded",
-      });
-      return;
-    }
-    fetch("/signin", {
+    if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){ 
+      M.toast({html: "Invalid email",classes:"#c62828 red darken-3 rounded"})
+      return
+  }
+    fetch("/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -33,17 +26,10 @@ function Signup() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.error) {
-          M.toast({
-            html: data.error,
-            classes: "#c62828 red darken-3 rounded",
-          });
+          M.toast({ html: data.error, classes: "#c62828 red darken-3 rounded" });
         } else {
-          M.toast({
-            html: data.message,
-            classes: "#43a047 green darken-1 rounded",
-          });
+          M.toast({ html: data.message, classes: "#43a047 green darken-1 rounded" });
           history.push("/signin");
         }
       })
@@ -51,6 +37,7 @@ function Signup() {
         console.log(err);
       });
   };
+
   return (
     <div className="mycard">
       <div className="card auth-card input-field">
