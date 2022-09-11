@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import M from "materialize-css";
 
 function CreatePost() {
-  // const history = useHistory();
+  const history = useHistory();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [image, setImage] = useState("");
@@ -24,6 +26,35 @@ function CreatePost() {
         console.log(err);
       });
   };
+
+    useEffect(()=>{
+      if(url){
+       fetch("/createpost",{
+           method:"post",
+           headers:{
+               "Content-Type":"application/json",
+               "Authorization":"Bearer "+localStorage.getItem("jwt")
+           },
+           body:JSON.stringify({
+               title,
+               body,
+               pic:url
+           })
+       }).then(res=>res.json())
+       .then(data=>{
+
+          if(data.error){
+             M.toast({html: data.error,classes:"#c62828 red darken-3 rounded"})
+          }
+          else{
+              M.toast({html:"Post created  ",classes:"#43a047 green darken-1 rounded"})
+              history.push('/')
+          }
+       }).catch(err=>{
+           console.log(err)
+       })
+   }
+   },[url])
 
   return (
     <div

@@ -38,6 +38,8 @@ function SignIn() {
             classes: "#c62828 red darken-3 rounded",
           });
         } else {
+          localStorage.setItem("jwt", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
           M.toast({
             html: `Welcome ${data.user.name}`,
             classes: "#43a047 green darken-1 rounded",
