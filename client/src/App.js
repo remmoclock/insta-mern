@@ -9,10 +9,20 @@ import Profile from "../src/Components/screens/Profile";
 import CreatePost from "./Components/screens/CreatePost";
 import { reducer, initialState } from "./reducers/userReducer";
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 const Routing = () => {
   const history = useHistory();
+  const { state, dispatch } = useContext(UserContext);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      dispatch({ type: "USER", payload: user });
+    } else {
+      if (!history.location.pathname.startsWith("/reset"))
+        history.push("/signin");
+    }
+  }, []);
   return (
     <>
       <Switch>
@@ -37,14 +47,14 @@ const Routing = () => {
 };
 
 function App() {
-  // const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    // <UserContext.Provider value={{ state, dispatch }}>
-    <BrowserRouter>
-      <NavBar />
-      <Routing />
-    </BrowserRouter>
-    // </UserContext.Provider>
+    <UserContext.Provider value={{ state, dispatch }}>
+      <BrowserRouter>
+        <NavBar />
+        <Routing />
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 export default App;
