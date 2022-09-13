@@ -9,13 +9,13 @@ function Navbar() {
   const renderList = () => {
     if (state) {
       return [
-        <li>
+        <li key="1">
           <Link to="/profile">Profile</Link>
         </li>,
-        <li>
+        <li key="2">
           <Link to="/create">Create Post</Link>
         </li>,
-        <li>
+        <li key="3">
           <button
             className="red darken-3 btn-small"
             style={{ marginRight: "5px" }}
@@ -31,10 +31,10 @@ function Navbar() {
       ];
     } else {
       return [
-        <li>
+        <li key="4">
           <Link to="/signin">Signin</Link>
         </li>,
-        <li>
+        <li key="5">
           <Link to="/signup">Signup</Link>
         </li>,
       ];

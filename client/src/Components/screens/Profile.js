@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { UserContext } from "../../App";
 
 function Profile() {
+  const [mypics, setPics] = useState([]);
+  const { state, dispatch } = useContext(UserContext);
+
+  useEffect(() => {
+    fetch("/mypost", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setPics(result.mypost);
+      });
+  }, []);
+
   return (
     <div style={{ maxWidth: "700px", margin: "0px auto" }}>
       <div
@@ -27,7 +44,7 @@ function Profile() {
             />
           </div>
           <div>
-            <h4>Mario</h4>
+            <h4>{state?.name}</h4>
             <div
               style={{
                 display: "flex",
@@ -53,66 +70,9 @@ function Profile() {
         </div>
       </div>
       <div className="gallery">
-        <img
-          className="item"
-          src="https://mobilesyrup.com/wp-content/uploads/2021/04/super-mario-party-scaled.jpg"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK1PAys9jfEnH_P1x51l2O9cMpoJYTO0StjJToXoFslxARByADcj7AFYTp2QG8zirrySo&usqp=CAU"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyBM09MW7gO_i1jcIwKItCDpwNgxzMhwrFhvt9xjW9invW2brIFQiiEK8AcQ1EJXc3v7Y&usqp=CAU"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://mobilesyrup.com/wp-content/uploads/2021/04/super-mario-party-scaled.jpg"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK1PAys9jfEnH_P1x51l2O9cMpoJYTO0StjJToXoFslxARByADcj7AFYTp2QG8zirrySo&usqp=CAU"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyBM09MW7gO_i1jcIwKItCDpwNgxzMhwrFhvt9xjW9invW2brIFQiiEK8AcQ1EJXc3v7Y&usqp=CAU"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://mobilesyrup.com/wp-content/uploads/2021/04/super-mario-party-scaled.jpg"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK1PAys9jfEnH_P1x51l2O9cMpoJYTO0StjJToXoFslxARByADcj7AFYTp2QG8zirrySo&usqp=CAU"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyBM09MW7gO_i1jcIwKItCDpwNgxzMhwrFhvt9xjW9invW2brIFQiiEK8AcQ1EJXc3v7Y&usqp=CAU"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://mobilesyrup.com/wp-content/uploads/2021/04/super-mario-party-scaled.jpg"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK1PAys9jfEnH_P1x51l2O9cMpoJYTO0StjJToXoFslxARByADcj7AFYTp2QG8zirrySo&usqp=CAU"
-          alt=""
-        />
-        <img
-          className="item"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyBM09MW7gO_i1jcIwKItCDpwNgxzMhwrFhvt9xjW9invW2brIFQiiEK8AcQ1EJXc3v7Y&usqp=CAU"
-          alt=""
-        />
+        {mypics?.map((item) => {
+          return <img key={item._id} className="item" src={item.photo} alt={item.title} />;
+        })}
       </div>
     </div>
   );
