@@ -7,12 +7,24 @@ function Signup() {
   const [password, setPasword] = useState("");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const PostData = () => {
-    if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){ 
-      M.toast({html: "Invalid email",classes:"#c62828 red darken-3 rounded"})
-      return
-  }
+    if (
+      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      )
+    ) {
+      M.toast({
+        html: "Invalid email",
+        classes: "#c62828 red darken-3 rounded",
+      });
+      return;
+    }
     fetch("/signup", {
       method: "post",
       headers: {
@@ -27,9 +39,15 @@ function Signup() {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          M.toast({ html: data.error, classes: "#c62828 red darken-3 rounded" });
+          M.toast({
+            html: data.error,
+            classes: "#c62828 red darken-3 rounded",
+          });
         } else {
-          M.toast({ html: data.message, classes: "#43a047 green darken-1 rounded" });
+          M.toast({
+            html: data.message,
+            classes: "#43a047 green darken-1 rounded",
+          });
           history.push("/signin");
         }
       })
@@ -54,12 +72,21 @@ function Signup() {
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPasword(e.target.value)}
-        />
+        <div style={{ marginBottom: "25px" }}>
+          <input
+            type={passwordShown ? "text" : "password"}
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPasword(e.target.value)}
+          />
+          <button
+            class="material-icons btn-small waves-effect waves-light #64b5f6 black darken-1"
+            onClick={togglePassword}
+          >
+            {passwordShown ? "visibility" : "visibility_off"}
+          </button>
+        </div>
+
         <button
           className="btn waves-effect waves-light #64b5f6 blue darken-1"
           onClick={() => PostData()}

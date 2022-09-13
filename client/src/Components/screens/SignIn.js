@@ -8,6 +8,11 @@ function SignIn() {
   const history = useHistory();
   const [password, setPasword] = useState("");
   const [email, setEmail] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
 
   const PostData = () => {
     if (
@@ -64,12 +69,20 @@ function SignIn() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPasword(e.target.value)}
-        />
+        <div style={{ marginBottom: "25px" }}>
+          <input
+            type={passwordShown ? "text" : "password"}
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPasword(e.target.value)}
+          />
+          <button
+            class="material-icons btn-small waves-effect waves-light #64b5f6 black darken-1"
+            onClick={togglePassword}
+          >
+            {passwordShown ? "visibility" : "visibility_off"}
+          </button>
+        </div>
         <button
           className="btn waves-effect waves-light #64b5f6 blue darken-1"
           onClick={() => PostData()}
