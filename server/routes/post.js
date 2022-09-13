@@ -7,13 +7,14 @@ const requireLogin = require("../middleware/requireLogin");
 router.get("/allpost", requireLogin, (req, res) => {
   Post.find({ postedBy: req.user._id })
     .populate("postedBy", "_id name")
-    .then((mypost) => {
-      res.json({ mypost });
+    .then((posts) => {
+      res.json({ posts });
     })
     .catch((err) => {
       console.log(err);
     });
 });
+
 router.get("/mypost", requireLogin, (req, res) => {
   Post.find()
     .populate("postedBy", "_id name")
