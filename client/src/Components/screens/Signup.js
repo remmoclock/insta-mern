@@ -80,7 +80,7 @@ function Signup() {
             onChange={(e) => setPasword(e.target.value)}
           />
           <button
-            class="material-icons btn-small waves-effect waves-light #64b5f6 black darken-1"
+            className="material-icons btn-small waves-effect waves-light #64b5f6 black darken-1"
             onClick={togglePassword}
           >
             {passwordShown ? "visibility" : "visibility_off"}
