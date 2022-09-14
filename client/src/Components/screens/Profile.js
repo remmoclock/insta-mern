@@ -71,7 +71,7 @@ function Profile() {
       </div>
       <div className="gallery">
         {mypics?.map((item) => {
-          return <img key={item._id} className="item" src={item.photo} alt={item.title} />;
+          return <img key={item._id} style={{margin : "10px"}} className="item" src={item.photo} alt={item.title} />;
         })}
       </div>
     </div>
