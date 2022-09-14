@@ -5,8 +5,10 @@ const Post = mongoose.model("Post");
 const requireLogin = require("../middleware/requireLogin");
 
 router.get("/allpost", requireLogin, (req, res) => {
-  Post.find({ postedBy: req.user._id })
+  Post.find()
     .populate("postedBy", "_id name")
+    .populate("comments.postedBy", "_id name")
+    .sort("-createdAt")
     .then((posts) => {
       res.json({ posts });
     })
