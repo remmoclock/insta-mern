@@ -133,9 +133,11 @@ function Home() {
                   favorite
                 </i>
               )}
-              <h6>
-                {item.likes.length} {item.likes.length > 1 ? "likes" : "like"}
-              </h6>
+              {item.likes.length > 0 && (
+                <span>
+                  {item.likes.length} {item.likes.length > 1 ? "likes" : "like"}
+                </span>
+              )}
               <h6>{item.title}</h6>
               <p>{item.body}</p>
               {item.comments.map((record) => {
