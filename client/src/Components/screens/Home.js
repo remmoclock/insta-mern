@@ -108,6 +108,9 @@ function Home() {
       {data?.map((item) => {
         return (
           <div className="card home-card" key={item._id}>
+            <h5 style={{ display: "grid", justifyContent: "center" }}>
+              {item.postedBy.name}
+            </h5>
             <div className="card-image">
               <img src={item.photo} />
             </div>
