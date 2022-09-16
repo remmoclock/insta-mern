@@ -34,7 +34,7 @@ function Home() {
       .then((result) => {
         //   console.log(result)
         const newData = data.map((item) => {
-          if (item._id == result._id) {
+          if (item._id === result._id) {
             return result;
           } else {
             return item;
@@ -62,7 +62,7 @@ function Home() {
       .then((result) => {
         //   console.log(result)
         const newData = data.map((item) => {
-          if (item._id == result._id) {
+          if (item._id === result._id) {
             return result;
           } else {
             return item;
@@ -91,7 +91,7 @@ function Home() {
       .then((result) => {
         console.log(result);
         const newData = data.map((item) => {
-          if (item._id == result._id) {
+          if (item._id === result._id) {
             return result;
           } else {
             return item;
@@ -150,7 +150,7 @@ function Home() {
               )}
             </h5>
             <div className="card-image">
-              <img src={item.photo} />
+              <img src={item.photo} alt="" />
             </div>
             <div className="card-content">
               {item.likes.includes(state._id) ? (
