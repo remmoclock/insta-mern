@@ -52,9 +52,9 @@ function Profile() {
                 width: "108%",
               }}
             >
-              <h6>92 posts</h6>
-              <h6>12 followers </h6>
-              <h6>21 following</h6>
+              <h6>{mypics.length} posts</h6>
+              <h6>{state ? state.followers.length : "0"} followers</h6>
+              <h6>{state ? state.following.length : "0"} following</h6>
             </div>
           </div>
         </div>
@@ -71,7 +71,15 @@ function Profile() {
       </div>
       <div className="gallery">
         {mypics?.map((item) => {
-          return <img key={item._id} style={{margin : "10px"}} className="item" src={item.photo} alt={item.title} />;
+          return (
+            <img
+              key={item._id}
+              style={{ margin: "10px" }}
+              className="item"
+              src={item.photo}
+              alt={item.title}
+            />
+          );
         })}
       </div>
     </div>
