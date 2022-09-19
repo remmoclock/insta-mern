@@ -16,6 +16,9 @@ function Navbar() {
           <Link to="/create">Create Post</Link>
         </li>,
         <li key="3">
+          <Link to="/myfollowingpost">Following Posts</Link>
+        </li>,
+        <li key="4">
           <button
             className="red darken-3 btn-small"
             style={{ marginRight: "5px" }}
@@ -44,7 +47,11 @@ function Navbar() {
   return (
     <nav>
       <div className="nav-wrapper white">
-        <Link to={state ? "/" : "/signin"} className="brand-logo left" style={{marginLeft : "5px"}}>
+        <Link
+          to={state ? "/" : "/signin"}
+          className="brand-logo left"
+          style={{ marginLeft: "5px" }}
+        >
           Instagram
         </Link>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
