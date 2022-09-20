@@ -112,6 +112,7 @@ function UserProfile() {
                   width: "60%",
                   height: "60%",
                   borderRadius: "80px",
+                  padding: "10px"
                 }}
                 src={userProfile.user.pic}
                 alt=""
