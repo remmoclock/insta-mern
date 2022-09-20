@@ -31,16 +31,16 @@ router.get("/getsubpost", requireLogin, (req, res) => {
     });
 });
 
-router.get("/mypost", requireLogin, (req, res) => {
-  Post.find()
-    .populate("postedBy", "_id name")
-    .then((mypost) => {
-      res.json({ mypost });
+router.get('/mypost',requireLogin,(req,res)=>{
+    Post.find({postedBy:req.user._id})
+    .populate("PostedBy","_id name")
+    .then(mypost=>{
+        res.json({mypost})
     })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+    .catch(err=>{
+        console.log(err)
+    })
+})
 
 router.post("/createpost", requireLogin, (req, res) => {
   const { title, body, pic } = req.body;
