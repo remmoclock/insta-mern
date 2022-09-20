@@ -18,7 +18,7 @@ function Profile() {
       });
   }, []);
 
-  console.log("mypics",mypics);
+  console.log("mypics", mypics);
 
   return (
     <div style={{ maxWidth: "700px", margin: "0px auto" }}>
@@ -37,8 +37,8 @@ function Profile() {
           <div>
             <img
               style={{
-                width: "160px",
-                height: "160px",
+                width: "60%",
+                height: "60%",
                 borderRadius: "80px",
                 objectFit: "cover",
               }}
@@ -46,11 +46,11 @@ function Profile() {
             />
           </div>
           <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
             <h4>{state?.name}</h4>
             <h5>{state?.email}</h5>

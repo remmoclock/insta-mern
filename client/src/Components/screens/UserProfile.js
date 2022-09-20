@@ -109,8 +109,8 @@ function UserProfile() {
             <div>
               <img
                 style={{
-                  width: "160px",
-                  height: "160px",
+                  width: "60%",
+                  height: "60%",
                   borderRadius: "80px",
                 }}
                 src={userProfile.user.pic}
