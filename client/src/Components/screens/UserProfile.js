@@ -101,6 +101,7 @@ function UserProfile() {
             style={{
               display: "flex",
               justifyContent: "space-around",
+              alignItems: "center",
               margin: "18px 0px",
               borderBottom: "1px solid grey",
             }}
@@ -116,9 +117,15 @@ function UserProfile() {
                 alt=""
               />
             </div>
-            <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <h4>{userProfile.user.name}</h4>
-              <h5>{userProfile.user.email}</h5>
+
               <div
                 style={{
                   display: "flex",
@@ -131,7 +138,13 @@ function UserProfile() {
                 <h6>{userProfile.user.following.length} following</h6>
               </div>
               {showfollow ? (
-                <>
+                <span
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <i
                     className="material-icons"
                     onClick={() => followUser()}
@@ -143,9 +156,15 @@ function UserProfile() {
                     add_circle
                   </i>
                   <span>Follow</span>
-                </>
+                </span>
               ) : (
-                <>
+                <span
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <i
                     className="material-icons"
                     onClick={() => unfollowUser()}
@@ -157,7 +176,7 @@ function UserProfile() {
                     check_box
                   </i>
                   <span>Unfollow</span>
-                </>
+                </span>
               )}
             </div>
           </div>

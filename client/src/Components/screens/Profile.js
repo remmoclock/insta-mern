@@ -45,7 +45,13 @@ function Profile() {
               src={state?.pic}
             />
           </div>
-          <div>
+          <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+          >
             <h4>{state?.name}</h4>
             <h5>{state?.email}</h5>
             <div
