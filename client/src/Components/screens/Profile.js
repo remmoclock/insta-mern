@@ -18,6 +18,8 @@ function Profile() {
       });
   }, []);
 
+  console.log("mypics",mypics);
+
   return (
     <div style={{ maxWidth: "700px", margin: "0px auto" }}>
       <div
@@ -40,7 +42,7 @@ function Profile() {
                 borderRadius: "80px",
                 objectFit: "cover",
               }}
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCjDEtcR8DzNhRirIEGG-Z5hOCY_TaFwv8lt-5rOQUPscxftGRQJtFdpdZBd3Qma69O00&usqp=CAU"
+              src={state?.pic}
             />
           </div>
           <div>

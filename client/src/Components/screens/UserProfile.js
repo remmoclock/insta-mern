@@ -8,7 +8,9 @@ function UserProfile() {
 
   const [mypics, setPics] = useState([]);
   const [userProfile, setProfile] = useState();
-  const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
+  const [showfollow, setShowFollow] = useState(
+    state ? !state.following.includes(userid) : true
+  );
 
   console.log("userid", userid);
 
@@ -77,7 +79,7 @@ function UserProfile() {
 
         setProfile((prevState) => {
           const newFollower = prevState.user.followers.filter(
-            (item) => item != data._id
+            (item) => item !== data._id
           );
           return {
             ...prevState,
@@ -110,7 +112,8 @@ function UserProfile() {
                   height: "160px",
                   borderRadius: "80px",
                 }}
-                // src={userProfile.user.pic}
+                src={userProfile.user.pic}
+                alt=""
               />
             </div>
             <div>
