@@ -8,7 +8,7 @@ function UserProfile() {
 
   const [mypics, setPics] = useState([]);
   const [userProfile, setProfile] = useState();
-  const [showfollow, setShowFollow] = useState(true);
+  const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
 
   console.log("userid", userid);
 

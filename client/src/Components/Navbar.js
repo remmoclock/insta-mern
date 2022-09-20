@@ -16,7 +16,7 @@ function Navbar() {
           <Link to="/create">Create Post</Link>
         </li>,
         <li key="3">
-          <Link to="/myfollowingpost">Following Posts</Link>
+          <Link to="/myfollowingpost">Friends Posts</Link>
         </li>,
         <li key="4">
           <button
