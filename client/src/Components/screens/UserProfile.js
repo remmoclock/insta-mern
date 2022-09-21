@@ -9,9 +9,8 @@ function UserProfile() {
   const [mypics, setPics] = useState([]);
   const [userProfile, setProfile] = useState();
   const [showfollow, setShowFollow] = useState(
-    state ? !state.following.includes(userid) : true
+    state ? !state.following.includes(userid) : false
   );
-
   console.log("userid", userid);
 
   useEffect(() => {
@@ -27,6 +26,17 @@ function UserProfile() {
         setProfile(result);
       });
   }, []);
+
+  // useEffect(() => {
+  //   localStorage.setItem("follow", JSON.stringify(showfollow));
+  // }, [showfollow]);
+
+  // useEffect(() => {
+  //   const items = JSON.parse(localStorage.getItem('follow'));
+  //   if (items) {
+  //    setItems(items);
+  //   }
+  // }, []);
 
   const followUser = () => {
     fetch("/follow", {
