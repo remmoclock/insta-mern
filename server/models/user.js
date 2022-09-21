@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
   pic: {
     type: String,
     default:
-      "https://res.cloudinary.com/mido92/image/upload/v1663673288/Avatar_e6tyqj.png",
+      "https://res.cloudinary.com/mido92/image/upload/v1663794985/Avatar_ctbhxj.png",
   },
   followers: [{ type: ObjectId, ref: "User" }],
   following: [{ type: ObjectId, ref: "User" }],
