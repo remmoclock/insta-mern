@@ -6,7 +6,6 @@ function UserProfile() {
   const { userid } = useParams();
   const { state, dispatch } = useContext(UserContext);
 
-  const [mypics, setPics] = useState([]);
   const [userProfile, setProfile] = useState();
   const [showfollow, setShowFollow] = useState(
     state ? !state.following.includes(userid) : false
