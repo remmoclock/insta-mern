@@ -125,7 +125,10 @@ function Profile() {
         <div className="file-field input-field" style={{ margin: "10px" }}>
           <div className="btn #64b5f6 blue darken-1">
             <span>Update pic</span>
-            <input type="file" />
+            <input
+              type="file"
+              onChange={(e) => updatePhoto(e.target.files[0])}
+            />
           </div>
           <div className="file-path-wrapper">
             <input className="file-path validate" type="text" />
