@@ -4,6 +4,7 @@ import { UserContext } from "../../App";
 function Profile() {
   const [mypics, setPics] = useState([]);
   const { state, dispatch } = useContext(UserContext);
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     fetch("/mypost", {
@@ -19,6 +20,60 @@ function Profile() {
   }, []);
 
   console.log("mypics", mypics);
+  useEffect(() => {
+    fetch("/mypost", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setPics(result.mypost);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (image) {
+      const data = new FormData();
+      data.append("file", image);
+      data.append("upload_preset", "insta-clone");
+      data.append("cloud_name", "mido92");
+      fetch("https://api.cloudinary.com/v1_1/mido92/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          fetch("/updatepic", {
+            method: "put",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + localStorage.getItem("jwt"),
+            },
+            body: JSON.stringify({
+              pic: data.url,
+            }),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+              localStorage.setItem(
+                "user",
+                JSON.stringify({ ...state, pic: result.pic })
+              );
+              dispatch({ type: "UPDATEPIC", payload: result.pic });
+              //window.location.reload()
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [image]);
+  const updatePhoto = (file) => {
+    setImage(file);
+  };
 
   return (
     <div style={{ maxWidth: "700px", margin: "0px auto" }}>
