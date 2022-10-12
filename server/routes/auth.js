@@ -2,10 +2,23 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const User = mongoose.model("User");
+const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
 const requireLogin = require("../middleware/requireLogin");
+const nodemailer = require("nodemailer");
+const sendgridTransport = require("nodemailer-sendgrid-transport");
+const { SENDGRID_API, EMAIL } = require("../config/keys");
+//
+
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key: SENDGRID_API,
+    },
+  })
+);
 
 router.get("/protected", requireLogin, (req, res) => {
   res.send("hello protected route");
@@ -77,6 +90,38 @@ router.post("/signin", (req, res) => {
       .catch((err) => {
         console.log(err);
       });
+  });
+});
+
+// RESET PASSWORD
+
+router.post("/reset-password", (req, res) => {
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+    }
+    const token = buffer.toString("hex");
+    User.findOne({ email: req.body.email }).then((user) => {
+      if (!user) {
+        return res
+          .status(422)
+          .json({ error: "User dont exists with that email" });
+      }
+      user.resetToken = token;
+      user.expireToken = Date.now() + 3600000;
+      user.save().then((result) => {
+        transporter.sendMail({
+          to: user.email,
+          from: "no-replay@insta.com",
+          subject: "password reset",
+          html: `
+                  <p>You requested for password reset</p>
+                  <h5>click in this <a href="${EMAIL}/reset/${token}">link</a> to reset password</h5>
+                  `,
+        });
+        res.json({ message: "check your email" });
+      });
+    });
   });
 });
 
