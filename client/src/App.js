@@ -10,12 +10,13 @@ import CreatePost from "./Components/screens/CreatePost";
 import UserProfile from "./Components/screens/UserProfile";
 import SubscribesUserPosts from "./Components/screens/SubscribesUserPosts";
 import { reducer, initialState } from "./reducers/userReducer";
+import Reset from "./Components/screens/Reset";
 
 export const UserContext = createContext();
 
 const Routing = () => {
   const history = useHistory();
-  const { state, dispatch } = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
@@ -48,6 +49,9 @@ const Routing = () => {
         </Route>
         <Route path="/myfollowingpost">
           <SubscribesUserPosts />
+        </Route>
+        <Route path="/reset">
+          <Reset />
         </Route>
       </Switch>
     </>

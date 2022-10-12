@@ -6,11 +6,10 @@ const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
+const SENDGRID_API = process.env.SENDGRID_API;
 const requireLogin = require("../middleware/requireLogin");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
-const { SENDGRID_API, EMAIL } = require("../config/keys");
-//
 
 const transporter = nodemailer.createTransport(
   sendgridTransport({
