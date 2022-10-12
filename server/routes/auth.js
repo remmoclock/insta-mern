@@ -6,18 +6,11 @@ const crypto = require("crypto");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
-const SENDGRID_API = process.env.SENDGRID_API;
+const MAIL = process.env.MAIL;
 const requireLogin = require("../middleware/requireLogin");
-const nodemailer = require("nodemailer");
-const sendgridTransport = require("nodemailer-sendgrid-transport");
 
-const transporter = nodemailer.createTransport(
-  sendgridTransport({
-    auth: {
-      api_key: SENDGRID_API,
-    },
-  })
-);
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_API);
 
 router.get("/protected", requireLogin, (req, res) => {
   res.send("hello protected route");
@@ -109,15 +102,17 @@ router.post("/reset-password", (req, res) => {
       user.resetToken = token;
       user.expireToken = Date.now() + 3600000;
       user.save().then((result) => {
-        transporter.sendMail({
+        sgMail.setApiKey(process.env.SENDGRID_API);
+        const msg = {
           to: user.email,
-          from: "no-replay@insta.com",
+          from: MAIL,
           subject: "password reset",
           html: `
                   <p>You requested for password reset</p>
-                  <h5>click in this <a href="${EMAIL}/reset/${token}">link</a> to reset password</h5>
+                  <h5>click in this <a href="http://localhost:3000/reset/${token}">link</a> to reset password</h5>
                   `,
-        });
+        };
+        sgMail.send(msg);
         res.json({ message: "check your email" });
       });
     });
