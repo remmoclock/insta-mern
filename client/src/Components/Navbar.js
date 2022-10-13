@@ -20,21 +20,21 @@ function Navbar() {
           <i
             data-target="modal1"
             className="large material-icons modal-trigger"
-            style={{ color: "black" }}
+            style={{ color: "black", cursor: "pointer" }}
           >
             search
           </i>
         </li>,
-        <li key="1">
+        <li key="2">
           <Link to="/profile">Profile</Link>
         </li>,
-        <li key="2">
+        <li key="3">
           <Link to="/create">Create Post</Link>
         </li>,
-        <li key="3">
+        <li key="4">
           <Link to="/myfollowingpost">Friends Posts</Link>
         </li>,
-        <li key="4">
+        <li key="5">
           <button
             className="red darken-3 btn-small"
             style={{ marginRight: "5px" }}
@@ -50,10 +50,10 @@ function Navbar() {
       ];
     } else {
       return [
-        <li key="4">
+        <li key="6">
           <Link to="/signin">Signin</Link>
         </li>,
-        <li key="5">
+        <li key="7">
           <Link to="/signup">Signup</Link>
         </li>,
       ];
@@ -93,7 +93,7 @@ function Navbar() {
       </div>
       <div
         id="modal1"
-        class="modal"
+        className="modal"
         ref={searchModal}
         style={{ color: "black" }}
       >
