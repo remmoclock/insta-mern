@@ -18,7 +18,6 @@ const Profile = () => {
       });
   }, []);
 
-  console.log("mypics", mypics);
   useEffect(() => {
     fetch("/mypost", {
       headers: {

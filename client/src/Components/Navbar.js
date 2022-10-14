@@ -7,10 +7,13 @@ function Navbar() {
   const { state, dispatch } = useContext(UserContext);
   const history = useHistory();
   const searchModal = useRef(null);
+  const sideNav = useRef(null);
   const [search, setSearch] = useState("");
   const [userDetails, setUserDetails] = useState([]);
+
   useEffect(() => {
     M.Modal.init(searchModal.current);
+    M.Sidenav.init(sideNav.current);
   }, []);
 
   const renderList = () => {
@@ -80,14 +83,30 @@ function Navbar() {
   return (
     <nav>
       <div className="nav-wrapper white">
-        <Link
-          to={state ? "/" : "/signin"}
-          className="brand-logo left"
-          style={{ marginLeft: "5px" }}
+        <div class="nav-wrapper">
+          <Link
+            to={state ? "/" : "/signin"}
+            className="brand-logo"
+            style={{ marginLeft: "5px" }}
+          >
+            Instagram
+          </Link>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+            <i class="material-icons">menu</i>
+          </a>
+          <ul id="nav-mobile" className="right hide-on-med-and-down ">
+            {renderList()}
+          </ul>
+        </div>
+
+        <ul
+          class="sidenav center-align"
+          id="mobile-demo"
+          ref={sideNav}
+          onClick={() => {
+            sideNav.current.open();
+          }}
         >
-          Instagram
-        </Link>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
           {renderList()}
         </ul>
       </div>
