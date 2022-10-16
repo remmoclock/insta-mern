@@ -1,7 +1,8 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../App";
 import M from "materialize-css";
+import Loader from "../Loader";
 
 function SignIn() {
   const { state, dispatch } = useContext(UserContext);
@@ -9,12 +10,18 @@ function SignIn() {
   const [password, setPasword] = useState("");
   const [email, setEmail] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
+  useEffect(() => {
+    console.log("loader is", loader);
+  }, [loader]);
+
   const PostData = () => {
+    setLoader(true);
     if (
       !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
@@ -53,13 +60,17 @@ function SignIn() {
             classes: "#43a047 green darken-1 rounded",
           });
           history.push("/");
+          setLoader(false);
         }
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  return (
+
+  return loader ? (
+    <Loader />
+  ) : (
     <div className="mycard">
       <div className="card auth-card input-field">
         <h2>Instagram</h2>
