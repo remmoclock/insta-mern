@@ -119,7 +119,8 @@ function UserProfile() {
             <div>
               <img
                 style={{
-                  width: "150px",
+                  width: "125px",
+                  height: "125px",
                   borderRadius: "80px",
                   padding: "10px",
                 }}
